@@ -19,11 +19,20 @@ public class SumArray {
         }
     }
 
-    private static long sum(String[][] validArray) throws MyArrayExceptions{
-        checkSizeArray(validArray);
-        checkIntsArray(validArray);
-        //TODO FIXME
-        return 0;
+    private static long sum(String[][] _array) throws MyArrayExceptions{
+        checkSizeArray(_array);
+        checkIntsArray(_array);
+        return _sum(_array);
+    }
+
+    private static long _sum(String[][] _array) {
+        long result = 0;
+        for (String[] strings : _array) {
+            for (String string : strings) {
+                result += (long)Integer.parseInt(string);
+            }
+        }
+        return result;
     }
 
     private static void checkIntsArray(String[][] _array) throws MyArrayDataException{
@@ -34,7 +43,8 @@ public class SumArray {
                 try {
                     Integer.parseInt(_array[row][col]);
                 } catch (NumberFormatException e) {
-                    throw new MyArrayDataException(WRONG_DATA_ARRAY);
+                    throw new MyArrayDataException(WRONG_DATA_ARRAY +
+                            "\n В строке: " + row + " столбце: " + col);
                 }
             }
         }
