@@ -4,6 +4,7 @@ public class SumArray {
     private static final int ARRAY_SISE = 4;
     private static final String WRONG_SIZE_ARRAY = "Неправильный размер массива!\nОдидаемый размер: 4x4.";
     private static final String WRONG_DATA_ARRAY = "Неверный тип дынных в массиве.";
+    private static final String RESULT_CAPTION = "Сумма эелементов массива:";
 
     public static void main(String[] args) {
         String[][] validArray = new String[][]
@@ -11,18 +12,34 @@ public class SumArray {
                  {"12", "18", "19", "98"},
                  {"14", "14", "8", "18"},
                  {"15", "56", "15", "91"}};
+        String[][] wronSizeArray = new String[][]
+                {{"56", "32", "1", "32"},
+                        {"12", "18", "19", "98"},
+                        {"15", "56", "15", "91"}};
+        String[][] wronDataArray = new String[][]
+                {{"56", "32", "1", "32"},
+                        {"12", "NaN", "19", "98"},
+                        {"14", "с", "8", "18"},
+                        {"15", "56", "Не число", "91"}};;
 
         try {
             System.out.println(sum(validArray));
+            System.out.println(sum(wronSizeArray));
+
+        } catch (MyArrayExceptions myArrayExceptions) {
+            myArrayExceptions.printStackTrace();
+        }
+        try {
+            System.out.println(sum(wronDataArray));
         } catch (MyArrayExceptions myArrayExceptions) {
             myArrayExceptions.printStackTrace();
         }
     }
 
-    private static long sum(String[][] _array) throws MyArrayExceptions{
+    private static String sum(String[][] _array) throws MyArrayExceptions{
         checkSizeArray(_array);
         checkIntsArray(_array);
-        return _sum(_array);
+        return RESULT_CAPTION + "\n" + _sum(_array);
     }
 
     private static long _sum(String[][] _array) {
