@@ -14,13 +14,13 @@ public class SumArray {
                  {"15", "56", "15", "91"}};
         String[][] wronSizeArray = new String[][]
                 {{"56", "32", "1", "32"},
-                        {"12", "18", "19", "98"},
-                        {"15", "56", "15", "91"}};
+                 {"12", "18", "19", "98"},
+                  {"15", "56", "15", "91"}};
         String[][] wronDataArray = new String[][]
                 {{"56", "32", "1", "32"},
-                        {"12", "NaN", "19", "98"},
-                        {"14", "с", "8", "18"},
-                        {"15", "56", "Не число", "91"}};;
+                 {"12", "NaN", "19", "98"},
+                  {"14", "с", "8", "18"},
+                  {"15", "56", "Не число", "91"}};;
 
         try {
             System.out.println(sum(validArray));
@@ -61,7 +61,7 @@ public class SumArray {
                     Integer.parseInt(_array[row][col]);
                 } catch (NumberFormatException e) {
                     throw new MyArrayDataException(WRONG_DATA_ARRAY +
-                            "\n В строке: " + row + " столбце: " + col);
+                            "\n В строке: " + (1  + row)  + " столбце: " + (1 + col) );
                 }
             }
         }
