@@ -2,9 +2,9 @@ package ru.geekbrains.java2.lesson_2;
 
 public class SumArray {
     private static final int ARRAY_SISE = 4;
-    private static final String WRONG_SIZE_ARRAY = "Неправильный размер массива!\nОдидаемый размер: 4x4.";
-    private static final String WRONG_DATA_ARRAY = "Неверный тип дынных в массиве.";
-    private static final String RESULT_CAPTION = "Сумма эелементов массива:";
+    private static final String WRONG_SIZE_ARRAY = "Wrong array size!\nExpected size: 4x4.";
+    private static final String WRONG_DATA_ARRAY = "Wrong data dype.";
+    private static final String RESULT_CAPTION = "Сумма эелементов:";
 
     public static void main(String[] args) {
         String[][] validArray = new String[][]
@@ -61,7 +61,7 @@ public class SumArray {
                     Integer.parseInt(_array[row][col]);
                 } catch (NumberFormatException e) {
                     throw new MyArrayDataException(WRONG_DATA_ARRAY +
-                            "\n В строке: " + (1  + row)  + " столбце: " + (1 + col) );
+                            "\n In row: " + (1  + row)  + ", column: " + (1 + col) );
                 }
             }
         }
