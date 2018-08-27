@@ -46,7 +46,7 @@ public class SumArray {
         long result = 0;
         for (String[] strings : _array) {
             for (String string : strings) {
-                result += (long)Integer.parseInt(string);
+                result += (long)Long.parseLong(string);
             }
         }
         return result;
