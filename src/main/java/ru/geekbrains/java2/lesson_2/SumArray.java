@@ -9,18 +9,19 @@ public class SumArray {
     public static void main(String[] args) {
         String[][] validArray = new String[][]
                 {{"56", "32", "1", "32"},
-                 {"12", "18", "19", "98"},
-                 {"14", "14", "8", "18"},
-                 {"15", "56", "15", "91"}};
+                        {"12", "18", "19", "98"},
+                        {"14", "14", "8", "18"},
+                        {"15", "56", "15", "91"}};
         String[][] wronSizeArray = new String[][]
                 {{"56", "32", "1", "32"},
-                 {"12", "18", "19", "98"},
-                  {"15", "56", "15", "91"}};
+                        {"12", "18", "19", "98"},
+                        {"15", "56", "15", "91"}};
         String[][] wronDataArray = new String[][]
                 {{"56", "32", "1", "32"},
-                 {"12", "NaN", "19", "98"},
-                  {"14", "с", "8", "18"},
-                  {"15", "56", "Не число", "91"}};;
+                        {"12", "NaN", "19", "98"},
+                        {"14", "с", "8", "18"},
+                        {"15", "56", "Не число", "91"}};
+        ;
 
         try {
             System.out.println(sum(validArray));
@@ -36,7 +37,7 @@ public class SumArray {
         }
     }
 
-    private static String sum(String[][] _array) throws MyArrayExceptions{
+    private static String sum(String[][] _array) throws MyArrayExceptions {
         checkSizeArray(_array);
         checkIntsArray(_array);
         return RESULT_CAPTION + "\n" + _sum(_array);
@@ -46,13 +47,13 @@ public class SumArray {
         long result = 0;
         for (String[] strings : _array) {
             for (String string : strings) {
-                result += (long)Long.parseLong(string);
+                result += (long) Long.parseLong(string);
             }
         }
         return result;
     }
 
-    private static void checkIntsArray(String[][] _array) throws MyArrayDataException{
+    private static void checkIntsArray(String[][] _array) throws MyArrayDataException {
         int row;
         int col;
         for (row = 0; row < _array.length; row++) {
@@ -61,13 +62,13 @@ public class SumArray {
                     Integer.parseInt(_array[row][col]);
                 } catch (NumberFormatException e) {
                     throw new MyArrayDataException(WRONG_DATA_ARRAY +
-                            "\n In row: " + (1  + row)  + ", column: " + (1 + col) );
+                            "\n In row: " + (1 + row) + ", column: " + (1 + col));
                 }
             }
         }
     }
 
-    private static void checkSizeArray(String[][] _array) throws MyArraySizeException{
+    private static void checkSizeArray(String[][] _array) throws MyArraySizeException {
         if (_array.length != ARRAY_SISE) {
             throw new MyArraySizeException(WRONG_SIZE_ARRAY);
         }
