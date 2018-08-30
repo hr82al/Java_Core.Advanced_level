@@ -1,6 +1,5 @@
 package ru.geekbrains.java2.lesson_3;
 
-import java.sql.SQLOutput;
 import java.util.*;
 
 public class LessonCollections {
@@ -31,7 +30,7 @@ public class LessonCollections {
         };
 
         System.out.println("Слово : количество таких слов в списке:");
-        coutUnique(words);
+        countUnique(words);
 
         //2.Phonebook
 
@@ -51,7 +50,7 @@ public class LessonCollections {
         phonebook.show();
     }
 
-    private static void coutUnique(String[] words) {
+    private static void countUnique(String[] words) {
         Map<String, Integer> numberOfWords = new LinkedHashMap<>();
         for (String word : words) {
             countWord(numberOfWords, word);
