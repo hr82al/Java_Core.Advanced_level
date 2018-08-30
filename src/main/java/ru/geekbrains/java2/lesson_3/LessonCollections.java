@@ -52,14 +52,21 @@ public class LessonCollections {
     }
 
     private static void coutUnique(String[] words) {
-        List<String> listWords = new ArrayList<>();
-        listWords.addAll(Arrays.asList(words));
-        Set<String> setWords = new LinkedHashSet<>();
-        setWords.addAll(listWords);
-        setWords.forEach(word ->{
-            System.out.println(word + " : " +
-                    Collections.frequency(listWords, word) + "."
-            );
-        });
+        Map<String, Integer> numberOfWords = new LinkedHashMap<>();
+        for (String word : words) {
+            countWord(numberOfWords, word);
+        }
+        for (String word: numberOfWords.keySet()) {
+            System.out.println(word + " : " + numberOfWords.get(word) + ".");
+        }
+    }
+
+    private static void countWord(Map<String, Integer> numberOfWords, String word) {
+        if (numberOfWords.containsKey(word)) {
+            numberOfWords.put(word, numberOfWords.get(word) + 1);
+        }
+        else {
+            numberOfWords.put(word,1);
+        }
     }
 }
