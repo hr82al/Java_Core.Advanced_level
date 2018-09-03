@@ -1,32 +1,40 @@
 package ru.geekbrains.java2.lesson_4;
 
+import lombok.Data;
 import javax.swing.*;
 import java.awt.*;
 
+@Data
 public class ChatWindow extends JFrame {
 
     private static final Double SIZE_RATIO = 0.6;
     private static final Double WINDOW_RATIO = 0.75;
     private static final Double MIN_SIZE_RATIO = 0.2;
 
+    private JEditorPane messagesPane;
+    private JTextField textField;
+    private JButton sendButton;
 
-    public ChatWindow() throws HeadlessException {
-        init();
-    }
 
-    private void init() {
+    public void init() {
         setTitle("Чат");
         setMinimumSize(calculateMinimumSize());
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         setBounds(calculateSizePosition());
         setLayout(new BoxLayout(getContentPane(), BoxLayout.Y_AXIS));
-        TextArea textArea = new TextArea();
-        add(textArea);
-        TextField textField = new TextField();
+        messagesPane = new JEditorPane();
+        messagesPane.setEditable(false);
+        add(messagesPane);
+        textField = new JTextField();
+        JPanel sender = new JPanel();
+        sender.setLayout(new BoxLayout(sender, BoxLayout.X_AXIS));
+        sendButton = new JButton("Отправить");
         textField.setMaximumSize(new Dimension(
                 Toolkit.getDefaultToolkit().getScreenSize().width,
-                textField.getMinimumSize().height));
-        add(textField);
+                sendButton.getMinimumSize().height));
+        sender.add(textField);
+        sender.add(sendButton);
+        add(sender);
         setVisible(true);
     }
 
@@ -46,7 +54,4 @@ public class ChatWindow extends JFrame {
         return sizePosition;
     }
 
-    public static void main(String[] args) {
-        ChatWindow chatWindow = new ChatWindow();
-    }
 }
