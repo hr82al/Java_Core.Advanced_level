@@ -2,11 +2,11 @@ package ru.geekbrains.java2.lesson5;
 
 import java.util.Arrays;
 
-public class MyTreads {
-    static final int SIZE = 10_000_000;
-    static final int H = SIZE / 2;
-    static float[] a1;
-    static float[] a2;
+class MyTreads {
+    private static final int SIZE = 10_000_000;
+    private static final int H = SIZE / 2;
+    private static float[] a1;
+    private static float[] a2;
 
     public static void main(String[] args) {
         calculateArray();
@@ -52,7 +52,6 @@ public class MyTreads {
         System.arraycopy(a2, 0, arr, H, H);
         System.out.println("Время склейки массива: " + (System.currentTimeMillis() - a) + " мс.");
         System.out.println("Время выполнения метода в 2 потока: " + (System.currentTimeMillis() - b) + " мс.");
-       // show(arr);
     }
 
     private static void calculateArray() {
@@ -63,6 +62,5 @@ public class MyTreads {
             arr[i] = (float)(arr[i] * Math.sin(0.2f + i / 5) * Math.cos(0.2f + i / 5) * Math.cos(0.4f + i / 2));
         }
         System.out.println("Время выполнения метода в один поток: " + (System.currentTimeMillis() - a) + " мс.");
-       // show(arr);
     }
 }
