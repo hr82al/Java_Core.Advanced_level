@@ -5,6 +5,7 @@ import java.util.Arrays;
 class MyTreads {
     private static final int SIZE = 10_000_000;
     private static final int H = SIZE / 2;
+    private static float[] arr;
     private static float[] a1;
     private static float[] a2;
 
@@ -14,7 +15,7 @@ class MyTreads {
     }
 
     private static void parallelCalculateArray() {
-        float[] arr = new float[SIZE];
+        arr = new float[SIZE];
         a1 = new float[H];
         a2 = new float[H];
         Arrays.fill(arr, 1f);
@@ -25,18 +26,12 @@ class MyTreads {
         System.out.println("Время разбивки массива: " + (System.currentTimeMillis() - a) + " мс.");
         Thread thread1 = new Thread(() -> {
             long a3 = System.currentTimeMillis();
-            for (int i = 0; i < H; i++) {
-                a1[i] = (float) (a1[i] * Math.sin(0.2f + i / 5) * Math.cos(0.2f + i / 5) * Math.cos(0.4f + i / 2));
-            }
+            operateArray(a1, 0);
             System.out.println("Время подсчёта 1-й половины массива: " + (System.currentTimeMillis() - a3) + " мс.");
         });
         Thread thread2 = new Thread(() -> {
             long a3 = System.currentTimeMillis();
-            int indx;
-            for (int i = H; i < SIZE; i++) {
-                indx = i - H;
-                a2[indx] = (float) (a2[indx] * Math.sin(0.2f + i / 5) * Math.cos(0.2f + i / 5) * Math.cos(0.4f + i / 2));
-            }
+            operateArray(a2, H);
             System.out.println("Время подсчёта 2-й половины массива: " + (System.currentTimeMillis() - a3) + " мс.");
         });
         thread1.start();
@@ -55,12 +50,16 @@ class MyTreads {
     }
 
     private static void calculateArray() {
-        float[] arr = new float[SIZE];
+        arr = new float[SIZE];
         Arrays.fill(arr, 1f);
         long a = System.currentTimeMillis();
-        for (int i = 0; i < SIZE; i++) {
-            arr[i] = (float)(arr[i] * Math.sin(0.2f + i / 5) * Math.cos(0.2f + i / 5) * Math.cos(0.4f + i / 2));
-        }
+        operateArray(arr, 0);
         System.out.println("Время выполнения метода в один поток: " + (System.currentTimeMillis() - a) + " мс.");
+    }
+
+    private static void operateArray(float[] _arr, int start) {
+        for (int j = 0; j < _arr.length; j++, start++) {
+            _arr[j] = (float)(_arr[j] * Math.sin(0.2f + start / 5) * Math.cos(0.2f + start / 5) * Math.cos(0.4f + start / 2));
+        }
     }
 }
