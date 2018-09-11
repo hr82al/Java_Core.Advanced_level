@@ -1,4 +1,4 @@
-package ru.geekbrains.javaCoreAdvanced.lesson_1;
+package ru.geekbrains.java2.lesson_1;
 
 import org.jetbrains.annotations.Contract;
 
