@@ -36,15 +36,14 @@ public class ClientHandler {
                 String s;
                 if (in.hasNext()) {
                     s = in.nextLine();
-
                     if (s.startsWith("/w")) {
                         sendPrivateMessage(s);
-                    } else
-                        sendBroadcastMessage(s);
-                    if (s != null && s.equals("/exit"))
-                        unsubscribe(this);
-                    if (s != null && !s.isEmpty())
-                        sendBroadcastMessage(nick + " : " + s);
+                    } else {
+                        if (s != null && s.equals("/exit"))
+                            unsubscribe(this);
+                        if (s != null && !s.isEmpty())
+                            sendBroadcastMessage(nick + " : " + s);
+                    }
                 }
             }
         }).start();
@@ -54,23 +53,20 @@ public class ClientHandler {
         String[] commands = msg.split(" ");
         String msgForNick = commands[1];
         if (hasNick(msgForNick)) {
-            PrintWriter pw = sendToNick(msgForNick);
             int length = commands.length - 2;
             String[]  message = new String[length];
             System.arraycopy(commands, 2, message, 0, length);
-            String str = "From " + msgForNick + String.join(" ", message);
-            pw.println(str);
-            System.out.println(str);
+            sendToNick(msgForNick, String.join(" ", message));
         }
     }
 
-    private PrintWriter sendToNick(String nick) {
+    private void sendToNick(String nick, String msg) {
         for (ClientHandler client : clients) {
             if (client.nick.equals(nick)) {
-                return client.out;
+                String str = "From " + nick + ": " + String.join(" ", msg);
+                client.out.println(str);
             }
         }
-        return null;
     }
 
     private boolean hasNick(String msgForNick) {
@@ -90,7 +86,6 @@ public class ClientHandler {
             if (!in.hasNextLine()) continue;
             String s = in.nextLine();
             if (s.startsWith("/auth")) {
-                System.out.println(s);
                 String[] commands = s.split(" ");// /auth login1 pass1
                 if (commands.length >= 3) {
                     String login = commands[1];
@@ -140,7 +135,6 @@ public class ClientHandler {
     }
 
     public void sendBroadcastMessage(String msg) {
-        System.out.println("broadcast");
         for (ClientHandler client : clients) {
             client.out.println(msg);
         }
