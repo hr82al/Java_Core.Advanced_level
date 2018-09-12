@@ -29,7 +29,7 @@ public class Chat {
             while (input.hasNext()) {
                 final String str = input.nextLine();
                 checkEnd(str);
-                out.println(prefix() + str);
+                out.println(str);
             }
         }).start();
     }
