@@ -13,7 +13,8 @@ public class MyServer {
              serverSocket = new ServerSocket(PORT);
              while (true) {
                  Socket socket = serverSocket.accept();
-                 new ClientHandler(socket);
+                 ClientHandler clientHandler = new ClientHandler(socket);
+                 clientHandler.run(clientHandler);
              }
         } catch (IOException e) {
             e.printStackTrace();

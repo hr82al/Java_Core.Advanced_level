@@ -11,7 +11,7 @@ public class ClientHandler {
     private Scanner in;
     private PrintWriter out;
     private AuthService authService = new BaseAuthService();
-    private List<ClientHandler> clients = new ArrayList<>();
+    private static List<ClientHandler> clients = new ArrayList<>();
     private String nick;
     private Socket socket;
 
@@ -24,15 +24,13 @@ public class ClientHandler {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        run();
-
     }
 
 
-    private void run() {
+    public void run(ClientHandler clientHandler) {
         new Thread(() -> {
             System.out.println("Новый клиент подлючился");
-            auth();
+            auth(clientHandler);
             System.out.println(nick + " handler waiting for new massages");
             while (socket.isConnected()) {
                 String s;
@@ -87,7 +85,7 @@ public class ClientHandler {
     /**
      * Wait for command: "/auth login1 pass1"
      */
-    private void auth() {
+    private void auth(ClientHandler clientHandler) {
         while (true) {
             if (!in.hasNextLine()) continue;
             String s = in.nextLine();
@@ -112,7 +110,7 @@ public class ClientHandler {
                         String msg = "Auth ok!";
                         System.out.println(msg);
                         out.println(msg);
-                        subscribe(this);
+                        subscribe(clientHandler);
                         break;
                     }
                 }
@@ -156,6 +154,3 @@ public class ClientHandler {
         clients.remove(clientHandler);
     }
 }
-// /auth login1 pass1
-// /auth login2 pass2
-// /auth login3 pass3
