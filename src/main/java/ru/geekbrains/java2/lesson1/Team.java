@@ -1,6 +1,4 @@
-package ru.geekbrains.java2.lesson_1;
-
-import java.util.Arrays;
+package ru.geekbrains.java2.lesson1;
 
 public class Team implements Competition{
 

@@ -1,4 +1,4 @@
-package ru.geekbrains.java2.lesson_4;
+package ru.geekbrains.java2.lesson4;
 
 public class Messages {
     private String messages = "";

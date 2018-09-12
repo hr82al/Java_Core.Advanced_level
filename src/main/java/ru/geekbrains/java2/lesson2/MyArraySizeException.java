@@ -1,4 +1,4 @@
-package ru.geekbrains.java2.lesson_2;
+package ru.geekbrains.java2.lesson2;
 
 public class MyArraySizeException extends MyArrayExceptions {
     public MyArraySizeException(String messaage) {

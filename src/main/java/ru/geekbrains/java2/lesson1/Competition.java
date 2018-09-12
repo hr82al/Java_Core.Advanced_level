@@ -1,4 +1,4 @@
-package ru.geekbrains.java2.lesson_1;
+package ru.geekbrains.java2.lesson1;
 
 public interface Competition {
     void showResults();

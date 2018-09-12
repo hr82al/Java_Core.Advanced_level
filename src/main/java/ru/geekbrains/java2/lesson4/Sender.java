@@ -1,4 +1,4 @@
-package ru.geekbrains.java2.lesson_4;
+package ru.geekbrains.java2.lesson4;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
