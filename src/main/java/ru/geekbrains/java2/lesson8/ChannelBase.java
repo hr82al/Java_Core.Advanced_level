@@ -36,6 +36,8 @@ public class ChannelBase implements Channel {
             return new Message(MessageType.EXIT_COMMAND, "");
         else if (s.startsWith("/w "))
             return new Message(MessageType.PRIVATE_MESSAGE, s.substring(3).trim());
+        else if (s.startsWith("/auth "))
+            return new Message(MessageType.AUTH_MESSAGE, s.substring(6).trim());
         return new Message(MessageType.BROADCAST_CHAT, s);
     }
 

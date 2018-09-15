@@ -57,10 +57,10 @@ public class ClientHandler {
             if (!channel.hasNextLine()) continue;
             Message message = channel.getMessage();
             if (MessageType.AUTH_MESSAGE.equals(message.getType())) {
-                String[] commands = message.getBody().split(" ");// /auth login1 pass1
-                if (commands.length >= 3) {
-                    String login = commands[1];
-                    String password = commands[2];
+                String[] commands = message.getBody().split(" ");// /login1 pass1
+                if (commands.length >= 2) {
+                    String login = commands[0];
+                    String password = commands[1];
                     System.out.println("Try to login with " + login + " and " + password);
                     String nick = server.getAuthService()
                             .authByLoginAndPassword(login, password);
