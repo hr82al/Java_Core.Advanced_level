@@ -30,6 +30,7 @@ public class ChannelBase implements Channel {
 
     @Override
     public Message getMessage() {
+        if (!sc.hasNextLine()) return null;
         String s = sc.nextLine();
         if (s == null || s.trim().isEmpty()) return null;
         if (s.equals("/exit"))

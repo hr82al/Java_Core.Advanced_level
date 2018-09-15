@@ -7,9 +7,11 @@ public class ClientHandler {
     private Server server;
     private String nick;
     private Channel channel;
+    private Socket socket;
 
     public ClientHandler(Socket socket, Server server) {
         this.server = server;
+        this.socket = socket;
 
         try {
             channel = ChannelBase.of(socket);
@@ -54,7 +56,8 @@ public class ClientHandler {
      */
     private void auth() {
         while (true) {
-            if (!channel.hasNextLine()) continue;
+            TimeoutChecker.set(this);
+            if (!channel.hasNextLine()) break;
             Message message = channel.getMessage();
             if (MessageType.AUTH_MESSAGE.equals(message.getType())) {
                 String[] commands = message.getBody().split(" ");// /login1 pass1
@@ -75,6 +78,7 @@ public class ClientHandler {
                     } else {
                         this.nick = nick;
                         String msg = "Auth ok!";
+                        TimeoutChecker.unset(this);
                         System.out.println(msg);
                         channel.sendMessage(msg);
                         server.subscribe(this);
@@ -93,5 +97,13 @@ public class ClientHandler {
 
     public String getNick() {
         return nick;
+    }
+
+    public void closeSocket() {
+        try {
+            socket.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }
